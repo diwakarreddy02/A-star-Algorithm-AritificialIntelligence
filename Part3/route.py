@@ -16,6 +16,8 @@ def parse_city_gps():
     d1 = {}
     with open('city-gps.txt', 'r') as file:
         for line in file.readlines():
+            if line == "\n":
+                continue
             l1 = line.split(" ")
             l1[-1] = float(l1[-1].strip())
             l1[-2] = float(l1[-2])
@@ -28,6 +30,8 @@ def parse_road_segments():
     d1 = {}
     with open('road-segments.txt', 'r') as file:
         for line in file.readlines():
+            if line == "\n":
+                continue
             l1 = line.split(" ")
             # Length in miles.
             l1[2] = float(l1[2])
