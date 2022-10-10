@@ -78,12 +78,11 @@ def get_distance(start_cords, end_cords):
 
     delta_lat = lat_end_radian - lat_start_radian
     delta_long = long_end_radian - long_start_radian
-    earth_radius_miles = 3956
+    earth_radius_miles = 3958.8
     return round((2 * asin(sqrt(sin(delta_lat / 2) ** 2 + cos(lat_start_radian) * cos(lat_end_radian) * sin(delta_long / 2) ** 2))) * earth_radius_miles, 3)
 
 
 def get_route_by_segments_cost(start, end):
-    city_gps_dict = parse_city_gps()
     road_segments_dict = parse_road_segments()
     # nodes_visited is of the format {curr_node: prev_node, ...}
     nodes_visited = {}
