@@ -21,7 +21,7 @@ def parse_city_gps():
             l1 = line.split(" ")
             l1[-1] = float(l1[-1].strip())
             l1[-2] = float(l1[-2])
-            d1[l1[0].strip()] = (l1[-2], l1[-1])
+            d1[l1[0].strip().replace('"', '')] = (l1[-2], l1[-1])
     file.close()
     return d1
 
@@ -38,8 +38,8 @@ def parse_road_segments():
             # Speed limit in miles/hour.
             l1[3] = float(l1[3])
             l1[-1] = l1[-1].strip()
-            key = l1[0]
-            subkey = l1[1]
+            key = l1[0].replace('"', '')
+            subkey = l1[1].replace('"', '')
             if key in d1:
                 d1[key][subkey] = l1[2:]
             else:
