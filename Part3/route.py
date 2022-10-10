@@ -9,8 +9,7 @@
 
 # !/usr/bin/env python3
 import sys
-from geopy import distance
-from math import tanh
+from math import tanh, radians, cos, sin, asin, sqrt
 
 
 def parse_city_gps():
@@ -69,6 +68,18 @@ def find_max_speed(road_segments_dict):
             if road_segments_dict[key][sub_key][1] > max_speed:
                 max_speed = road_segments_dict[key][sub_key][1]
     return max_speed
+
+
+def get_distance(start_cords, end_cords):
+    lat_start_radian = radians(start_cords[0])
+    long_start_radian = radians(start_cords[1])
+    lat_end_radian = radians(end_cords[0])
+    long_end_radian = radians(end_cords[1])
+
+    delta_lat = lat_end_radian - lat_start_radian
+    delta_long = long_end_radian - long_start_radian
+    earth_radius_miles = 3956
+    return round((2 * asin(sqrt(sin(delta_lat / 2) ** 2 + cos(lat_start_radian) * cos(lat_end_radian) * sin(delta_long / 2) ** 2))) * earth_radius_miles, 3)
 
 
 def get_route_by_segments_cost(start, end):
@@ -146,7 +157,7 @@ def get_route_by_distance_cost(start, end):
     start_node_cords = city_gps_dict[start]
     end_node_cords = city_gps_dict[end]
     # Heuristic -> Euclidean distance between 2 cities.
-    fringe = [(None, start, 0, distance.distance(start_node_cords, end_node_cords).miles)]
+    fringe = [(None, start, 0, get_distance(start_node_cords, end_node_cords))]
     # fringe -> [(node, cost_to_reach_the_node, total_cost=cost_to_reach_the_node+heuristic_cost)]
     while len(fringe) > 0:
         # Get node with minimum cost from the fringe.
@@ -162,7 +173,6 @@ def get_route_by_distance_cost(start, end):
             total_hours = 0.0
             total_delivery_hours = 0.0
             if nodes_visited[curr_node] is not None:
-                print("Minimum Cost: ", curr_cost)
                 # Trace the path.
                 curr = curr_node
                 while nodes_visited[curr] is not None:
@@ -185,7 +195,6 @@ def get_route_by_distance_cost(start, end):
                         total_delivery_hours += (t_road + (p * 2 * (t_road + t_trip)))
                     else:
                         total_delivery_hours += dist / speed
-                    print("curr_node: ", curr, "total_delivery_hours: ", total_delivery_hours)
                     total_hours += dist / speed
                     start = end
                 total_segments = len(route_taken)
@@ -209,7 +218,7 @@ def get_route_by_distance_cost(start, end):
             if curr_node in city_gps_dict and next_node in city_gps_dict:
                 curr_node_cords = city_gps_dict[curr_node]
                 next_node_cords = city_gps_dict[next_node]
-                next_node_heuristic_cost = distance.distance(curr_node_cords, next_node_cords).miles
+                next_node_heuristic_cost = get_distance(curr_node_cords, next_node_cords)
             next_node_total_cost = next_node_cost + next_node_heuristic_cost
             fringe.append((curr_node, next_node, next_node_cost, next_node_total_cost))
 
@@ -223,7 +232,7 @@ def get_route_by_time_cost(start, end):
     start_node_cords = city_gps_dict[start]
     end_node_cords = city_gps_dict[end]
     # Heuristic: (Euclidean distance from current node to end node) / max_speed
-    fringe = [(None, start, 0, distance.distance(start_node_cords, end_node_cords).miles / max_speed)]
+    fringe = [(None, start, 0, get_distance(start_node_cords, end_node_cords) / max_speed)]
     # fringe -> [(node, cost_to_reach_the_node, total_cost=cost_to_reach_the_node+heuristic_cost)]
     while len(fringe) > 0:
         # Get node with minimum cost from the fringe.
@@ -284,7 +293,7 @@ def get_route_by_time_cost(start, end):
             if curr_node in city_gps_dict and next_node in city_gps_dict:
                 curr_node_cords = city_gps_dict[curr_node]
                 next_node_cords = city_gps_dict[next_node]
-                next_node_heuristic_cost = distance.distance(curr_node_cords, next_node_cords).miles / max_speed
+                next_node_heuristic_cost = get_distance(curr_node_cords, next_node_cords) / max_speed
             next_node_total_cost = next_node_cost + next_node_heuristic_cost
             fringe.append((curr_node, next_node, next_node_cost, next_node_total_cost))
 
@@ -298,7 +307,7 @@ def get_route_by_delivery_cost(start, end):
     start_node_cords = city_gps_dict[start]
     end_node_cords = city_gps_dict[end]
     # Heuristic: (euclidean distance from current node to end node) / max_speed
-    fringe = [(None, start, 0, distance.distance(start_node_cords, end_node_cords).miles / max_speed, 0)]
+    fringe = [(None, start, 0, get_distance(start_node_cords, end_node_cords) / max_speed, 0)]
     # fringe -> [(node, cost_to_reach_the_node, total_cost=cost_to_reach_the_node+heuristic_cost), total_time_so_far]
     while len(fringe) > 0:
         # Get node with minimum cost from the fringe.
@@ -371,7 +380,7 @@ def get_route_by_delivery_cost(start, end):
             if curr_node in city_gps_dict and next_node in city_gps_dict:
                 curr_node_cords = city_gps_dict[curr_node]
                 next_node_cords = city_gps_dict[next_node]
-                next_node_heuristic_cost = distance.distance(curr_node_cords, next_node_cords).miles / max_speed
+                next_node_heuristic_cost = get_distance(curr_node_cords, next_node_cords) / max_speed
             next_node_total_cost = next_node_cost + next_node_heuristic_cost
             fringe.append((curr_node, next_node, next_node_cost, next_node_total_cost, next_node_total_time))
 
