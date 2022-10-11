@@ -43,7 +43,8 @@
       - If the state has not been visited, add it to the visited dict
       - Push next set of elements into the fringe.
 
-**In this problem, what is the branching factor of the search tree?**
+_**In this problem, what is the branching factor of the search tree?**
+_
 
 Ans: Branching factor is the number of successors of each state. In this case, each state has 24 successors so **the branching factor is 24.**
 
