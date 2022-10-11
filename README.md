@@ -28,7 +28,7 @@
 - In the given problem, there is a 5 x 5 board with 25 tiles on it. It is similar to a 9-puzzle but with no empty spots. The goal is to achieve the desired board configuration by sliding the rows or columns (or) by rotating the inner or outer rings.
       **Goal State:** [[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16,17,18.19,20],[21,22,23,24,25]]
 
-1. The goal is to find the shortest path from the initial state to the goal state so **A* search** has been used.
+1. The goal is to find the shortest path from the initial state to the goal state so **A*** search has been used.
 2. Successor states are stored using **Priority Queue** to pick the best successor state by finding the cost to move to next state.
        - As there are 5 rows or coulmns that can be rotated, all their successor states are looped but the outer or inner rings can rotate only once so they need not be looped.
       - **heapq** module is used to represent the priority queue as it helps prioritize the state with lowest cost.
