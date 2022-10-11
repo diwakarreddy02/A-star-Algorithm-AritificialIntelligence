@@ -1,5 +1,30 @@
 # Assignment 1
 
+## Part 1
+
+- From the problem statement, five birds, each wearing a different number from 1 to N are sitting on a power line. They start in a random order and their      goal is to re-arrange themselves to be in order from 1 to N (e.g., 12345), in as few steps as possible.   
+
+Shortcomings of the Skeleton code:
+-From the given code, the algorihtm used is BFS and run time is very slow.
+
+
+1. Here, A* search is implemented in place of BFS(from skeleton code). 
+2. We initialized Fringe as PriorityQueue, then we added a tuple -> (cost, initial_state, path) to the fringe.
+      Here, **cost = g(s) = Cost that took to reach an intermediate state. 
+            **path = Each intermediate state to reach final state.
+3. **h(s) = Number of birds with misplaced positions. The heuristic is admissible because if current state is not goal state, then the minimun number of                 moves to reach goal state will not be less than this.
+   - Initialized a function h(state) to get the heuristic of an intermediate/current state.
+   - Here, we checked the current state birds position with the goal state to get the number of birds that are at wrong positions. 
+   - Once, we go the count, we returned the count value.
+5. **Procedure to reach goal state
+   1. Add the initial_state to the fringe priority queue
+   2. While, the fringe is not empty, Pop the the state that has the minimun f(s), i.e., g(s) + h(s). Funtion h(s) gets the heuristic value for that state. 
+   4. If goal state is reached, return the part.
+   5. If not then, get the successors(next intermediate states) of the recently poped fringe, and add them to the priority queue. 
+   6. Repeat steps 2 - 4 until goal state is reached.
+   
+
+
 ## Part 3
 
 1. Used A* search for minimizing the cost depending on the cost type. Minimized (g(s) + h(s)) for every cost type, where g(s) is the cost so far and h(s) is the heuristic cost to goal. 
