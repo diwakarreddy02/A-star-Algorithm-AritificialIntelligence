@@ -4,7 +4,7 @@
 
 - From the problem statement, five birds, each wearing a different number from 1 to N are sitting on a power line. They start in a random order and their      goal is to re-arrange themselves to be in order from 1 to N (e.g., 12345), in as few steps as possible.   
 
-###Shortcomings of the Skeleton code:
+**Shortcomings of the Skeleton code:**
 -From the given code, the algorihtm used is BFS and run time is very slow.
 
 
@@ -16,7 +16,7 @@
    - Initialized a function h(state) to get the heuristic of an intermediate/current state.
    - Here, we checked the current state birds position with the goal state to get the number of birds that are at wrong positions. 
    - Once, we go the count, we returned the count value.
-4. ###Procedure to reach goal state
+4. **Procedure to reach goal state**
    1. Add the initial_state to the fringe priority queue
    2. While, the fringe is not empty, Pop the the state that has the minimun f(s), i.e., g(s) + h(s). Funtion h(s) gets the heuristic value for that state. 
    4. If goal state is reached, return the part.
