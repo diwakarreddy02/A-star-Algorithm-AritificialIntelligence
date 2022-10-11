@@ -23,6 +23,33 @@
    5. If not then, get the successors(next intermediate states) of the recently poped fringe, and add them to the priority queue. 
    6. Repeat steps 2 - 4 until goal state is reached.
    
+## Part 2
+
+- In the given problem, there is a 5 x 5 board with 25 tiles on it. It is similar to a 9-puzzle but with no empty spots. The goal is to achieve the desired board configuration by sliding the rows or columns (or) by rotating the inner or outer rings.
+      **Goal State:** [[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16,17,18.19,20],[21,22,23,24,25]]
+
+1. The goal is to find the shortest path from the initial state to the goal state so **A* search** has been used.
+2. Successor states are stored using **Priority Queue** to pick the best successor state by finding the cost to move to next state.
+       - As there are 5 rows or coulmns that can be rotated, all their successor states are looped but the outer or inner rings can rotate only once so they need not be looped.
+      - **heapq** module is used to represent the priority queue as it helps prioritize the state with lowest cost.
+      - The cost is h(s) + g(s), where h(s) is the heuristic function and g(s) is the length so far from the initial state.  
+3. **Algorithm**
+      - Initialize an empty fringe. 
+      - Add a dictionary to track whether a state has been visited or not.
+      - Insert starting elements into fringe.
+      - If fringe is not empty, pop out elements from the fringe.
+      - Get all the possible successor states from current state.
+      - If successor state is the goal state, return the current path plus the final move
+      - If the state has not been visited, add it to the visited dict
+      - Push next set of elements into the fringe.
+
+**In this problem, what is the branching factor of the search tree?**
+Ans: Branching factor is the number of successors of each state. In this case, each state has 24 successors so **the branching factor is 24.**
+
+**If the solution can be reached in 7 moves, about how many states would we need to explore before we
+found it if we used BFS instead of A* search?**
+Ans: BFS explores all the successors before moving to the next stage. So for the 2nd move it explores 24 * 1 = 24 states, for the 3rd move it explores 24 * 2 = 48 states and so on. 
+As the solution is reached in 7 moves, the number of states explored would be 24 * (1 + 2 + 3 + 4 + 5 + 6) = 24 * 21 = **504 states**
 
 
 ## Part 3
