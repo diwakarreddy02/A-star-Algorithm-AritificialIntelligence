@@ -43,11 +43,12 @@
       - If the state has not been visited, add it to the visited dict
       - Push next set of elements into the fringe.
 
-_In this problem, what is the branching factor of the search tree?_
+_Question 1: In this problem, what is the branching factor of the search tree?_
+
 
 Ans: Branching factor is the number of successors of each state. In this case, each state has 24 successors so **the branching factor is 24.**
 
-**If the solution can be reached in 7 moves, about how many states would we need to explore before we
+**Question 2: If the solution can be reached in 7 moves, about how many states would we need to explore before we
 found it if we used BFS instead of A* search?**
 
 Ans: BFS explores all the successors before moving to the next stage. So for the 2nd move it explores 24 * 1 = 24 states, for the 3rd move it explores 24 * 2 = 48 states and so on. 
