@@ -1,3 +1,11 @@
+"""
+I've submitted assignment on time. But printed additional line in the output. 
+So, I took permission from Prof. Zoran to push the code again after deadline without late penalty.
+Only change I made from the initial push is, I commented the line #94 ->  'print("Test Cases are:", test_cases)' . 
+"""
+
+
+
 #!/usr/local/bin/python3
 # solve_birds.py : Bird puzzle solver
 #
@@ -83,7 +91,7 @@ if __name__ == "__main__":
     with open(sys.argv[1], 'r') as file:
         for line in file:
             test_cases.append([ int(i) for i in line.split() ])
-    print("Test Cases are:", test_cases)
+    #print("Test Cases are:", test_cases)
     for initial_state in test_cases:
         	print('From state ' + str(initial_state) + " found goal state by taking path: " + str(solve(initial_state)))
 
