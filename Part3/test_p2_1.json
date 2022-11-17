@@ -1,0 +1,11 @@
+{
+    "start": "Bloomington,_Indiana",
+    "end": "Louisville,_Kentucky",
+    "timeout": 120,
+    "solutions": {
+        "segments": 5, 
+        "distance": 83.0, 
+        "time": 1.757, 
+        "delivery": 1.796
+    }
+}

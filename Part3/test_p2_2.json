@@ -1,0 +1,11 @@
+{
+    "start": "Portland,_Maine",
+    "end": "Tignish,_Prince_Edward_Island",
+    "timeout": 300,
+    "solutions": {
+        "segments": 24, 
+        "distance": 712.0, 
+        "time": 14.371, 
+        "delivery": 26.090
+    }
+}

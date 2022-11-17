@@ -1,0 +1,11 @@
+test_puzzle_2022_case1_points,10
+test_puzzle_2022_case1_status,passed
+test_puzzle_2022_case2_points,0
+test_puzzle_2022_case2_status,failed
+test_puzzle_2022_case3_points,0
+test_puzzle_2022_case3_status,failed
+test_puzzle_2022_case4_points,10
+test_puzzle_2022_case4_status,passed
+test_puzzle_2022_case5_points,10
+test_puzzle_2022_case5_status,passed
+Part2_Total,30

@@ -1,0 +1,11 @@
+{
+    "start": "Seattle,_Washington",
+    "end": "Miami,_Florida",
+    "timeout": 300,
+    "solutions": {
+        "segments": 87, 
+        "distance": 3248.0, 
+        "time": 53.996, 
+        "delivery": 109.323
+    }
+}
